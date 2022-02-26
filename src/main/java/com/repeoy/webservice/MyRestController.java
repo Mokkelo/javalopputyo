@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 public class MyRestController {
 
-    List<Exam> exams = new ArrayList<>();
+    List<Student> students = new ArrayList<>();
+    List<Course> courses = new ArrayList<>();
 
     @GetMapping("home")
     public String home(){
@@ -91,16 +93,80 @@ public class MyRestController {
                 "height", height);
     }
 
-    @PostMapping("addexam")
-    public String addExam(@RequestParam String subject, @RequestParam String grade){
-        Exam e = new Exam(subject,grade);
-        exams.add(e);
-        return "Kurssi lisätty";
+
+
+
+
+
+
+
+// tasta eteenpain omaa koodia
+
+
+    @PostMapping("addstudent")
+    public List<Student> addStudent(@RequestParam String fName,
+                                    @RequestParam String lName,
+                                    @RequestParam int number,
+                                    @RequestParam String address,
+                                    @RequestParam int opiskelijaID){
+        Student e = new Student(fName,lName,number, address, opiskelijaID);
+        students.add(e);
+        return getStudents();
     }
 
-    @GetMapping("exams")
-    public List<Exam> getExams(){
-        return exams;
+    @GetMapping("students")
+    public List<Student> getStudents(){
+        return students;
+    }
+
+
+    @PostMapping("addcourse")
+    public String addCourse(@RequestParam String courseName,
+                            @RequestParam String teacher,
+                            @RequestParam int grade,
+                            @RequestParam int kurssiID
+                            ){
+        Course e = new Course(courseName, teacher, grade, kurssiID);
+        courses.add(e);
+        return "kurssi" +courseName+ "lisätty";
+    }
+
+    @PostMapping("studentToCourse")
+    public String studentToCourse(@RequestParam int kurssiID,
+                            @RequestParam int opiskleijaID
+    ){
+
+        Course e = new Course(courseName, teacher, grade, kurssiID);
+        courses.add(e);
+        return "kurssi  lisätty";
+    }
+
+    @GetMapping("courses")
+    public List<Course> getCourses(){
+        return courses;
+    }
+
+    @PostMapping("addtocourse")
+    public String addtocourse (@RequestParam int KurssiID,
+                               @RequestParam int opiskelijaID
+    )
+    {
+        ////////////////tahan jotain
+
+    }
+
+
+
+
+    @GetMapping("ilmoitttautumiset")
+    public List<AddToCourse> getAddToCourse(){
+        if
     }
 
 }
+
+
+
+
+
+    
